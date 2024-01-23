@@ -139,7 +139,33 @@
       };
 
       // 2) Dragen skal umiddelbart gjøre et motangrep når den blir angrepet av en helt.
-      // Dragen skal angripe en tilfeldig helt - kun helter som er i live. "alive"-property må være true. Det skal komme en ny alert "Dragens navn" har angrepet "Heltens navn". Helten som blir angrepet sitt liv "current HP" skal bli trukket med dragens damage. 
+      // Dragen skal angripe en tilfeldig helt - kun helter som er i live. "alive"-property må være true. Det skal komme en ny alert "Dragens navn" har angrepet "Heltens navn". Helten som blir angrepet sitt liv "current HP" skal bli trukket med dragens damage.
+      
+
+      function dragonRandomAttackBack() {
+let livingHeroes = [];
+for (let i = 0; i < heroesArray.length; i++){
+  if (heroesArray[i].alive) {
+    livingHeroes.push(heroesArray[i]);
+  } 
+  
+}
+if (livingHeroes.length > 0) {
+  let randomHero = Math.floor(Math.random() * livingHeroes.length);
+  let randomAttackedHero = livingHeroes[randomHero];
+
+  randomHero.currentHP -= dragonObject.damage;
+  if (randomAttacedkHero.currentHP <= 0) {
+    randomAttackedHero.alive = false;
+  }
+  alert(`${dragonObject} har angrepet ${randomAttackedHero.name}. ${randomAttackedHero} sin gjennværende HP er ${randomAttackedHero.currentHP}`);
+} else {
+  alert("Alle heltene er døde :(, Dragen vant :(:(");
+}
+
+
+      }
+      
     </script>
   </body>
 </html>
