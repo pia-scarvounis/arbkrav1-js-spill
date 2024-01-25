@@ -109,7 +109,7 @@
 
       // 1) lager en funksjon som gjør at når bruker trykker på en av heltene, skal helten angripe dragen. legg til alert der det står at (heltens navn) har gjort (heltens skade) på (dragens navn). Dragens liv (current HP) skal bli trukket med heltens damage avhengig av hvilken helt den blir angrepet av. Dragens current HP blir oppdatert i arrayet.
 
-      // Påkrevd å bruke: alert, function, onclick/event listener, manipulering av array-objekter.
+      // Påkrevd å bruke: alert*, function*, onclick/event listener*, manipulering av array-objekter*.
 
 
       // Endring av navn & HP i health-bar containers:
@@ -125,12 +125,19 @@
       const dragonNameTxt = document.getElementById("dragon-name-txt");
       dragonNameTxt.textContent = "Daar Dragon";
 
-      // dette funker ikke, fiks det senere: 
-      function updateHealthbars() {
+       // dette funker ikke, fiks det senere: 
+       function updateHealthbars() {
         let healerHealthTxt = document.getElementById("healer-health-txt");
-        healerHealthTxt.textContent = heroesArray[0].currentHP;
+        healerHealthTxt.textContent = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
+
         let archerHealthTxt = document.getElementById("archer-health-txt");
-        archerHealthTxt.textContent = heroesArray[1].currentHP;
+        archerHealthTxt.textContent = `${heroesArray[1].currentHP} / ${heroesArray[1].maxHP} HP`;
+
+        let warriorHealthTxt = document.getElementById("warrior-health-txt");
+        warriorHealthTxt.textContent = `${heroesArray[2].currentHP} / ${heroesArray[2].maxHP} HP`;
+
+        let dragonHealthTxt = document.getElementById("text-container dragon-health-txt");
+        dragonHealthTxt.textContent = `${dragonObject.currentHP} / ${dragonObject.maxHP} HP`;
       };
 
       // Hero attacks! 
@@ -151,6 +158,7 @@
           alert("Dragen er allerede beseiret!");
         }
         dragonRandomAttackBack();
+        updateHealthbars();
       }
       document.querySelector(".healer img").onclick = function () {
         heroesAttackDragon(0);
