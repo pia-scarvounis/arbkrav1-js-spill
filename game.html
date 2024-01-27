@@ -125,7 +125,7 @@
       const dragonNameTxt = document.getElementById("dragon-name-txt");
       dragonNameTxt.textContent = "Daar Dragon";
 
-       // dette funker ikke, fiks det senere: 
+       // update health-bars. drage & heroes
        function updateHealthbars() {
         let healerHealthTxt = document.getElementById("healer-health-txt");
         healerHealthTxt.textContent = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
@@ -136,7 +136,7 @@
         let warriorHealthTxt = document.getElementById("warrior-health-txt");
         warriorHealthTxt.textContent = `${heroesArray[2].currentHP} / ${heroesArray[2].maxHP} HP`;
 
-        let dragonHealthTxt = document.getElementById("text-container dragon-health-txt");
+        let dragonHealthTxt = document.querySelector(".dragon-health-txt");
         dragonHealthTxt.textContent = `${dragonObject.currentHP} / ${dragonObject.maxHP} HP`;
       };
 
