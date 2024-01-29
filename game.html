@@ -163,6 +163,7 @@
         }
         dragonRandomAttackBack();
         updateHealthbars();
+        removeDeadHeroes();
       }
       document.querySelector(".healer img").onclick = function () {
         heroesAttackDragon(0);
@@ -179,7 +180,7 @@
 
 
       function dragonRandomAttackBack() {
-        
+         updateHealthbars();
         let livingHeroes = [];
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
@@ -206,24 +207,44 @@
         } else {
           alert("Alle heltene er døde :( Dragen vant :(:(");
         }
+        removeDeadHeroes();
+       
       }
 
       // 3) Heltene som har HP 0 eller mindre skal ikke kunne angripes av dragen, og fjernes fra skjermen. Spillet med de andre fortsetter
 
       // Påkrevd å bruke: function, .remove, if/else, manipulering av array-objekter
 
+  
       function removeDeadHeroes() {
-    if (randomAttackedHero.currentHP <= 0) {
-      const heroImgContainer = document.querySelector(".img-container");
-        
-    }};
+        if (heroesArray[0].currentHP <= 0) {
+        let imgHealer = document.querySelector(".img-container.healer");
+        if (imgHealer) {
+            imgHealer.remove();
+            setTimeout(function () {
+                alert(`${heroesArray[0].name} er ute av gamet!`);
+            }, 250); }
 
-  
+        }
+        if (heroesArray[1].currentHP <= 0) {
+        let imgArcher = document.querySelector(".img-container.archer");
+        if (imgArcher) {
+            imgArcher.remove();
+            setTimeout(function () {
+                alert(`${heroesArray[1].name} er ute av gamet!`);
+            }, 250); }
+        }
+        if (heroesArray[2].currentHP <= 0) {
+        let imgWarrior = document.querySelector(".img-container.warrior");
+        if (imgWarrior) {
+            imgWarrior.remove();
+            setTimeout(function () {
+                alert(`${heroesArray[2].name} er ute av gamet!`);
+            }, 250); }
+        }
+    }
+      
 
-
-  
-
-    
    
   
      
