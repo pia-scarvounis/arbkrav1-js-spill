@@ -154,14 +154,13 @@
           if (dragonObject.currentHP < 0) {
             dragonObject.currentHP = 0;
           }
-
           alert(
             `${hero.name} har gjort ${hero.damage} skade på ${dragonObject.name}. Dragens gjenværende HP: ${dragonObject.currentHP}`
-          );
+          );dragonRandomAttackBack();
         } else {
           alert("Dragen er allerede beseiret!");
         }
-        dragonRandomAttackBack();
+        
         updateHealthbars();
         removeDeadHeroes();
       }
@@ -180,7 +179,6 @@
 
 
       function dragonRandomAttackBack() {
-         updateHealthbars();
         let livingHeroes = [];
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
