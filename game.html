@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="game.css" />
   </head>
   <!-- HTML KODEN TRENGER DU IKKE RØRE FOR Å LØSE OPPGAVENE. -->
-  
-<!-- har endret HP i health-txt for at det skal bli riktig i spillet.
+
+  <!-- har endret HP i health-txt for at det skal bli riktig i spillet.
    endre det om jeg finner at av hvordan det kan endres på en annen måte -->
   <body>
     <div class="main-container">
@@ -109,8 +109,6 @@
         alive: true,
       };
 
-      
-
       // Endring av navn & HP i health-bar containers:
       const healerNameTxt = document.getElementById("healer-name-txt");
       healerNameTxt.textContent = "Henriette Healer";
@@ -124,8 +122,8 @@
       const dragonNameTxt = document.getElementById("dragon-name-txt");
       dragonNameTxt.textContent = "Daar Dragon";
 
-       // update health-bars. drage & heroes
-       function updateHealthbars() {
+      // update health-bars. drage & heroes
+      function updateHealthbars() {
         let healerHealthTxt = document.getElementById("healer-health-txt");
         healerHealthTxt.textContent = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
 
@@ -137,14 +135,13 @@
 
         let dragonHealthTxt = document.querySelector(".dragon-health-txt");
         dragonHealthTxt.textContent = `${dragonObject.currentHP} / ${dragonObject.maxHP} HP`;
-      };
+      }
 
       // 1) lager en funksjon som gjør at når bruker trykker på en av heltene, skal helten angripe dragen. legg til alert der det står at (heltens navn) har gjort (heltens skade) på (dragens navn). Dragens liv (current HP) skal bli trukket med heltens damage avhengig av hvilken helt den blir angrepet av. Dragens current HP blir oppdatert i arrayet.
 
       // Påkrevd å bruke: alert*, function*, onclick/event listener*, manipulering av array-objekter*.
 
-
-      // Hero attacks! 
+      // Hero attacks!
       function heroesAttackDragon(heroId) {
         const hero = heroesArray[heroId];
 
@@ -156,13 +153,18 @@
           }
           alert(
             `${hero.name} har gjort ${hero.damage} skade på ${dragonObject.name}. Dragens gjenværende HP: ${dragonObject.currentHP}`
-          );dragonRandomAttackBack();
+          );
+          updateHealthbars();
+          removeDragonImg();
+          dragonRandomAttackBack();
+          updateHealthbars();
+          
         } else {
           alert("Dragen er allerede beseiret!");
+         
         }
-        
-        updateHealthbars();
-        removeDeadHeroes();
+
+       
       }
       document.querySelector(".healer img").onclick = function () {
         heroesAttackDragon(0);
@@ -177,7 +179,6 @@
       // 2) Dragen skal umiddelbart gjøre et motangrep når den blir angrepet av en helt.
       // Dragen skal angripe en tilfeldig helt - kun helter som er i live. "alive"-property må være true. Det skal komme en ny alert "Dragens navn" har angrepet "Heltens navn". Helten som blir angrepet sitt liv "current HP" skal bli trukket med dragens damage.
 
-
       function dragonRandomAttackBack() {
         let livingHeroes = [];
         for (let i = 0; i < heroesArray.length; i++) {
@@ -187,10 +188,8 @@
         }
         if (livingHeroes.length > 0) {
           let randomHero = Math.floor(Math.random() * livingHeroes.length);
-  
 
           let randomAttackedHero = livingHeroes[randomHero];
-          
 
           randomAttackedHero.currentHP -= dragonObject.damage;
           if (randomAttackedHero.currentHP <= 0) {
@@ -200,54 +199,58 @@
           alert(
             `${dragonObject.name} har angrepet ${randomAttackedHero.name}. ${randomAttackedHero.name} sin gjennværende HP er ${randomAttackedHero.currentHP}`
           );
-         
-
         } else {
           alert("Alle heltene er døde :( Dragen vant :(:(");
         }
-        removeDeadHeroes();
-       
       }
 
       // 3) Heltene som har HP 0 eller mindre skal ikke kunne angripes av dragen, og fjernes fra skjermen. Spillet med de andre fortsetter
-
+     
       // Påkrevd å bruke: function, .remove, if/else, manipulering av array-objekter
 
-  
       function removeDeadHeroes() {
         if (heroesArray[0].currentHP <= 0) {
-        let imgHealer = document.querySelector(".img-container.healer");
-        if (imgHealer) {
+          let imgHealer = document.querySelector(".img-container.healer");
+          if (imgHealer) {
             imgHealer.remove();
             setTimeout(function () {
-                alert(`${heroesArray[0].name} er ute av gamet!`);
-            }, 250); }
-
+              alert(`${heroesArray[0].name} er ute av gamet!`);
+            }, 250);
+          }
         }
         if (heroesArray[1].currentHP <= 0) {
-        let imgArcher = document.querySelector(".img-container.archer");
-        if (imgArcher) {
+          let imgArcher = document.querySelector(".img-container.archer");
+          if (imgArcher) {
             imgArcher.remove();
             setTimeout(function () {
-                alert(`${heroesArray[1].name} er ute av gamet!`);
-            }, 250); }
+              alert(`${heroesArray[1].name} er ute av gamet!`);
+            }, 250);
+          }
         }
         if (heroesArray[2].currentHP <= 0) {
-        let imgWarrior = document.querySelector(".img-container.warrior");
-        if (imgWarrior) {
+          let imgWarrior = document.querySelector(".img-container.warrior");
+          if (imgWarrior) {
             imgWarrior.remove();
             setTimeout(function () {
-                alert(`${heroesArray[2].name} er ute av gamet!`);
-            }, 250); }
+              alert(`${heroesArray[2].name} er ute av gamet!`);
+            }, 250);
+          }
+        }
+      } 
+      function removeDragonImg() {
+    if (dragonObject.currentHP <= 0) {
+        let imgDragon = document.querySelector(".enemy-container .dragon"); 
+        if (imgDragon) {
+            imgDragon.remove();
+            setTimeout(function () {
+                alert(`${dragonObject.name} har tapt`); 
+            }, 250);
         }
     }
-      
-
-   
-  
-     
+}
 
       // 4) Spillet er tapt; alle helters HP = 0 dragens HP = over 0 skal alle helter bort fra skjermen og en alert skal dukke opp "Spillet er tapt, *dragens navn* har vunnet"
+ 
 
       // Påkrevd å bruke: alert, function, .remove, if/else/switch, array-metode
 
@@ -256,8 +259,6 @@
       // Påkrevd å bruke: alert, function, .remove, if/else
 
       // TILLEGGSFUNKSJON: 5) istedet for en alert som gir mld når spillet er tapt/vunnet, lag en div-tag og en H1-tag og gi de styling ved å gi de klassenavn i JS. Skal ha ulik styling avhengig om man vinner el taper.
-  
-    
     </script>
   </body>
 </html>
