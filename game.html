@@ -200,7 +200,7 @@
             `${dragonObject.name} har angrepet ${randomAttackedHero.name}. ${randomAttackedHero.name} sin gjennværende HP er ${randomAttackedHero.currentHP}`
           );
         } else {
-          alert("Alle heltene er døde :( Dragen vant :(:(");
+          alert("Spillet er tapt, Daar Dragon har vunnet!");
         }
       }
 
@@ -244,6 +244,7 @@
             imgDragon.remove();
             setTimeout(function () {
                 alert(`${dragonObject.name} har tapt`); 
+                alert("Gratulerer, du har vunnet spillet");
             }, 250);
         }
     }
