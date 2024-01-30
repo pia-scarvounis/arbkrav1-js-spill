@@ -122,7 +122,7 @@
       const dragonNameTxt = document.getElementById("dragon-name-txt");
       dragonNameTxt.textContent = "Daar Dragon";
 
-      // update health-bars. drage & heroes
+      // update health-bars. drage & heroes:
       function updateHealthbars() {
         let healerHealthTxt = document.getElementById("healer-health-txt");
         healerHealthTxt.textContent = `${heroesArray[0].currentHP} / ${heroesArray[0].maxHP} HP`;
@@ -136,10 +136,6 @@
         let dragonHealthTxt = document.querySelector(".dragon-health-txt");
         dragonHealthTxt.textContent = `${dragonObject.currentHP} / ${dragonObject.maxHP} HP`;
       }
-
-      // 1) lager en funksjon som gjør at når bruker trykker på en av heltene, skal helten angripe dragen. legg til alert der det står at (heltens navn) har gjort (heltens skade) på (dragens navn). Dragens liv (current HP) skal bli trukket med heltens damage avhengig av hvilken helt den blir angrepet av. Dragens current HP blir oppdatert i arrayet.
-
-      // Påkrevd å bruke: alert*, function*, onclick/event listener*, manipulering av array-objekter*.
 
       // Hero attacks!
       function heroesAttackDragon(heroId) {
@@ -158,13 +154,9 @@
           removeDragonImg();
           dragonRandomAttackBack();
           updateHealthbars();
-          
         } else {
           alert("Dragen er allerede beseiret!");
-         
         }
-
-       
       }
       document.querySelector(".healer img").onclick = function () {
         heroesAttackDragon(0);
@@ -176,9 +168,7 @@
         heroesAttackDragon(2);
       };
 
-      // 2) Dragen skal umiddelbart gjøre et motangrep når den blir angrepet av en helt.
-      // Dragen skal angripe en tilfeldig helt - kun helter som er i live. "alive"-property må være true. Det skal komme en ny alert "Dragens navn" har angrepet "Heltens navn". Helten som blir angrepet sitt liv "current HP" skal bli trukket med dragens damage.
-
+      // drage attack!
       function dragonRandomAttackBack() {
         let livingHeroes = [];
         for (let i = 0; i < heroesArray.length; i++) {
@@ -204,10 +194,7 @@
         }
       }
 
-      // 3) Heltene som har HP 0 eller mindre skal ikke kunne angripes av dragen, og fjernes fra skjermen. Spillet med de andre fortsetter
-     
-      // Påkrevd å bruke: function, .remove, if/else, manipulering av array-objekter
-
+      // fjerning av døde helter og drage & alerts
       function removeDeadHeroes() {
         if (heroesArray[0].currentHP <= 0) {
           let imgHealer = document.querySelector(".img-container.healer");
@@ -236,30 +223,19 @@
             }, 250);
           }
         }
-      } 
+      }
       function removeDragonImg() {
-    if (dragonObject.currentHP <= 0) {
-        let imgDragon = document.querySelector(".enemy-container .dragon"); 
-        if (imgDragon) {
+        if (dragonObject.currentHP <= 0) {
+          let imgDragon = document.querySelector(".enemy-container .dragon");
+          if (imgDragon) {
             imgDragon.remove();
             setTimeout(function () {
-                alert(`${dragonObject.name} har tapt`); 
-                alert("Gratulerer, du har vunnet spillet");
+              alert(`${dragonObject.name} har tapt`);
+              alert("Gratulerer, du har vunnet spillet");
             }, 250);
+          }
         }
-    }
-}
-
-      // 4) Spillet er tapt; alle helters HP = 0 dragens HP = over 0 skal alle helter bort fra skjermen og en alert skal dukke opp "Spillet er tapt, *dragens navn* har vunnet"
- 
-
-      // Påkrevd å bruke: alert, function, .remove, if/else/switch, array-metode
-
-      // 5) Spillet er vunnet. Hvis dragens HP er 0 el mindre. Dragen skal forsvinne fra nettleser, alert skal dukke opp: "Gratulerer, du har vunnet spillet"
-
-      // Påkrevd å bruke: alert, function, .remove, if/else
-
-      // TILLEGGSFUNKSJON: 5) istedet for en alert som gir mld når spillet er tapt/vunnet, lag en div-tag og en H1-tag og gi de styling ved å gi de klassenavn i JS. Skal ha ulik styling avhengig om man vinner el taper.
+      }
     </script>
   </body>
 </html>
