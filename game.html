@@ -170,7 +170,7 @@
 
       // drage attack!
       function dragonRandomAttackBack() {
-        let livingHeroes = [];
+        let livingHeroes = heroesArray.filter(hero => hero.alive && hero.currentHP > 0);
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
             livingHeroes.push(heroesArray[i]);
@@ -238,7 +238,6 @@
         }
       }
 
-      // hvis tid fiks: dragen angriper tilbake når den har 0 poeng. 
     </script>
   </body>
 </html>
