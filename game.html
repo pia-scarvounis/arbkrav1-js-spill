@@ -183,6 +183,7 @@
 
           randomAttackedHero.currentHP -= dragonObject.damage;
           if (randomAttackedHero.currentHP <= 0) {
+            randomAttackedHero.currentHP = 0;
             randomAttackedHero.alive = false;
             removeDeadHeroes();
           }
@@ -236,6 +237,8 @@
           }
         }
       }
+
+      // hvis tid fiks: dragen angriper tilbake når den har 0 poeng. 
     </script>
   </body>
 </html>
