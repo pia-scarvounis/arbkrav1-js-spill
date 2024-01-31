@@ -144,15 +144,18 @@
         if (dragonObject.currentHP > 0) {
           dragonObject.currentHP -= hero.damage;
 
-          if (dragonObject.currentHP < 0) {
+          if (dragonObject.currentHP <= 0) {
             dragonObject.currentHP = 0;
-          }
+          
           alert(
             `${hero.name} har gjort ${hero.damage} skade på ${dragonObject.name}. Dragens gjenværende HP: ${dragonObject.currentHP}`
           );
+          } else {
+            alert(`${hero.name} har gjort ${hero.damage} skade på ${dragonObject.name}. Dragens gjenværende HP: ${dragonObject.currentHP}`); dragonRandomAttackBack();
+          }
+        
           updateHealthbars();
           removeDragonImg();
-          dragonRandomAttackBack();
           updateHealthbars();
         } else {
           alert("Dragen er allerede beseiret!");
@@ -167,10 +170,13 @@
       document.querySelector(".warrior img").onclick = function () {
         heroesAttackDragon(2);
       };
+   
 
       // drage attack!
       function dragonRandomAttackBack() {
-        let livingHeroes = heroesArray.filter(hero => hero.alive && hero.currentHP > 0);
+        let livingHeroes = heroesArray.filter(
+          (hero) => hero.alive && hero.currentHP > 0
+        );
         for (let i = 0; i < heroesArray.length; i++) {
           if (heroesArray[i].alive) {
             livingHeroes.push(heroesArray[i]);
@@ -237,7 +243,6 @@
           }
         }
       }
-
     </script>
   </body>
 </html>
